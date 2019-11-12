@@ -1,0 +1,19 @@
+﻿@model WebStoreASP.ViewModels.EmployeeView;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetEmployeeDetails</title>
+</head>
+<body>
+    <h1>Карточка сотрудника @Model.FirstName @Model.LastName</h1>
+    <div>
+        <p>Нанят: @Model.HiringDate.ToString("dd MMMM yyyy года")</p>
+        <p>Дата рождения: @Model.BirthDay.ToString("dd MMMM yyyy года")</p>
+        <p>Возраст: @Model.Age</p>
+    </div>
+    <a href="/employee/getemployees">Назад к списку сотрудников</a>
+</body>
+</html>
