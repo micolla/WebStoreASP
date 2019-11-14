@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore", "WebStoreASP\WebStore.csproj", "{AB551874-F414-4D20-BF96-168801BAFBC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStoreTests", "Tests\WebStoreTests\WebStoreTests.csproj", "{E90448EB-64F2-44E4-ACFD-13A0DD0229DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C430DABF-5CB5-40B4-8866-E441DB3D4A88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{AB551874-F414-4D20-BF96-168801BAFBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB551874-F414-4D20-BF96-168801BAFBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB551874-F414-4D20-BF96-168801BAFBC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E90448EB-64F2-44E4-ACFD-13A0DD0229DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E90448EB-64F2-44E4-ACFD-13A0DD0229DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E90448EB-64F2-44E4-ACFD-13A0DD0229DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E90448EB-64F2-44E4-ACFD-13A0DD0229DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E90448EB-64F2-44E4-ACFD-13A0DD0229DC} = {C430DABF-5CB5-40B4-8866-E441DB3D4A88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73BF95A8-4964-4CA5-A9AF-2C899EAB0ACF}
