@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace WebStoreASP.Controllers
+namespace WebStore.Controllers
 {
     public class HomeController : Controller
     {
