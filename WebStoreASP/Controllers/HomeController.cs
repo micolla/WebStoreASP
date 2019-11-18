@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace WebStoreASP.Controllers
+namespace WebStore.Controllers
 {
     public class HomeController : Controller
     {
@@ -15,7 +15,50 @@ namespace WebStoreASP.Controllers
             return View();
         }
 
-        
+        public IActionResult Page404()
+        {
+            return View();
+        }
+
+        public IActionResult Blog()
+        {
+            return View();
+        }
+
+        public IActionResult BlogSingle()
+        {
+            return View();
+        }
+
+        public IActionResult Cart()
+        {
+            return View();
+        }
+
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult ProductDetails()
+        {
+            return View();
+        }
+
+        public IActionResult Shop()
+        {
+            return View();
+        }
 
     }
 }

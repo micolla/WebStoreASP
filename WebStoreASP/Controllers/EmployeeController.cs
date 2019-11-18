@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebStoreASP.ViewModels;
+using WebStore.ViewModels;
 
 namespace WebStore.Controllers
 {
@@ -27,9 +27,12 @@ namespace WebStore.Controllers
         {
             return View(_Employees);
         }
-        public IActionResult GetEmployeeDetails(int id)
+        public IActionResult GetEmployeeDetails(int? id)
         {
-            return View(_Employees.Where(r => r.Id == id).SingleOrDefault());
+            var employee = _Employees.FirstOrDefault(e => e.Id == id);
+            if (employee is null)
+                return NotFound();
+            return View(employee);
         }
     }
 }

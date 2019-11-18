@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WebStoreASP
+namespace WebStore
 {
     public class Startup
     {
@@ -27,6 +27,9 @@ namespace WebStoreASP
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
 
             app.UseMvc(routes =>
             {
