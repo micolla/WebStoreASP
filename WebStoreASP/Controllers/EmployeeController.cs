@@ -4,32 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.ViewModels;
+using WebStore.Data.Interfaces;
+using WebStore.Infrastructure.Mappings;
 
 namespace WebStore.Controllers
 {
     public class EmployeeController : Controller
     {
-        public static readonly List<EmployeeView> _Employees = new List<EmployeeView>
+        IEmployeeDataProvider _EmployeeData;
+        public EmployeeController(IEmployeeDataProvider employeeDataProvider)
         {
-            new EmployeeView{Id=1,FirstName="Николай",LastName="Донцов"
-                ,HiringDate=DateTime.Parse("2016-05-01"),BirthDay=DateTime.Parse("1990-12-22")},
-            new EmployeeView{Id=2,FirstName="Александр",LastName="Иванов"
-                ,HiringDate=DateTime.Parse("2001-05-01"),BirthDay=DateTime.Parse("1985-10-10")},
-            new EmployeeView{Id=3,FirstName="Сидор",LastName="Сидоров"
-                ,HiringDate=DateTime.Parse("1999-05-01"),BirthDay=DateTime.Parse("1960-05-22")},
-            new EmployeeView{Id=4,FirstName="Инокентий",LastName="Смактуновский"
-                ,HiringDate=DateTime.Parse("2019-05-01"),BirthDay=DateTime.Parse("1999-02-22")},
-            new EmployeeView{Id=5,FirstName="Афанасий",LastName="Ленин"
-                ,HiringDate=DateTime.Parse("2010-05-01"),BirthDay=DateTime.Parse("1970-06-01")}
-        };
+            _EmployeeData = employeeDataProvider;
+        }
 
         public IActionResult GetEmployees()
         {
-            return View(_Employees);
+            return View(_EmployeeData.GetAll().Select(e=>e.MapEmployeeView()));
         }
         public IActionResult GetEmployeeDetails(int? id)
         {
-            var employee = _Employees.FirstOrDefault(e => e.Id == id);
+            if (!id.HasValue)
+                return View("Page404");
+            var employee = _EmployeeData.GetById(id.Value).MapEmployeeView();
             if (employee is null)
                 return NotFound();
             return View(employee);

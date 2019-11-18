@@ -5,5 +5,5 @@ using WebStore.Data.Entity;
 
 namespace WebStore.Data.Interfaces
 {
-    interface IEmployeeDataProvider : IDataProvider<Employee> { }
+    public interface IEmployeeDataProvider : IDataProvider<Employee> { }
 }

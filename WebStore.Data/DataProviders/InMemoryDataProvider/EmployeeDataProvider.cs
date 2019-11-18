@@ -25,27 +25,37 @@ namespace WebStore.Data.DataProviders.InMemoryDataProvider
 
         public IEnumerable<Employee> GetAll()
         {
-            throw new NotImplementedException();
+            return _db.Employees;
         }
 
         public Employee GetById(int id)
         {
-            throw new NotImplementedException();
+            var employee = _db.Employees.FirstOrDefault(e => e.Id == id);
+            return employee;
         }
 
-        public bool Remove(Employee entity)
+        public bool Remove(int id)
         {
-            throw new NotImplementedException();
+            var entity = GetById(id);
+            if (entity == null) return false;
+            return _db.Employees.Remove(entity);
         }
 
-        public void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
+        public void SaveChanges() { }
 
-        public bool Update(Employee entity)
+        public bool Update(int id, Employee entity)
         {
-            throw new NotImplementedException();
+            if (entity is null)
+                throw new ArgumentNullException(nameof(Employee));
+
+            var db_employee = GetById(id);
+            if (db_employee is null) return false;
+
+            db_employee.FirstName = entity.FirstName;
+            db_employee.LastName = entity.LastName;
+            db_employee.HiringDate = entity.HiringDate;
+            db_employee.BirthDay = entity.BirthDay;
+            return true;
         }
     }
 }
