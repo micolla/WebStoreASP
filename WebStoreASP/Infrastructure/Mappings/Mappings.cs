@@ -16,5 +16,21 @@ namespace WebStore.Infrastructure.Mappings
                 ,BirthDay=employee.BirthDay
             };
         }
+
+        public static Employee MapEmployee(this EmployeeView employeeView)
+        {
+            return new Employee
+            {
+                Id = employeeView.Id
+                ,
+                FirstName = employeeView.FirstName
+                ,
+                LastName = employeeView.LastName
+                ,
+                HiringDate = employeeView.HiringDate
+                ,
+                BirthDay = employeeView.BirthDay
+            };
+        }
     }
 }
