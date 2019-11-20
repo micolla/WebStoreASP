@@ -7,8 +7,8 @@ namespace WebStore.Data.Interfaces
     {
         IEnumerable<T> GetAll();
         int Add(T entity);
-        bool Remove(T entity);
-        bool Update(T entity);
+        bool Remove(int id);
+        bool Update(int id, T entity);
         T GetById(int id);
         void SaveChanges();
     }

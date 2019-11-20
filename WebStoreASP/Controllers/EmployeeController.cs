@@ -4,35 +4,90 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.ViewModels;
+using WebStore.Data.Interfaces;
+using WebStore.Infrastructure.Mappings;
 
 namespace WebStore.Controllers
 {
     public class EmployeeController : Controller
     {
-        public static readonly List<EmployeeView> _Employees = new List<EmployeeView>
+        IEmployeeDataProvider _EmployeeData;
+        public EmployeeController(IEmployeeDataProvider employeeDataProvider)
         {
-            new EmployeeView{Id=1,FirstName="Николай",LastName="Донцов"
-                ,HiringDate=DateTime.Parse("2016-05-01"),BirthDay=DateTime.Parse("1990-12-22")},
-            new EmployeeView{Id=2,FirstName="Александр",LastName="Иванов"
-                ,HiringDate=DateTime.Parse("2001-05-01"),BirthDay=DateTime.Parse("1985-10-10")},
-            new EmployeeView{Id=3,FirstName="Сидор",LastName="Сидоров"
-                ,HiringDate=DateTime.Parse("1999-05-01"),BirthDay=DateTime.Parse("1960-05-22")},
-            new EmployeeView{Id=4,FirstName="Инокентий",LastName="Смактуновский"
-                ,HiringDate=DateTime.Parse("2019-05-01"),BirthDay=DateTime.Parse("1999-02-22")},
-            new EmployeeView{Id=5,FirstName="Афанасий",LastName="Ленин"
-                ,HiringDate=DateTime.Parse("2010-05-01"),BirthDay=DateTime.Parse("1970-06-01")}
-        };
+            _EmployeeData = employeeDataProvider;
+        }
+
+        private EmployeeView FindEmployee(int? id)
+        {
+            if (!id.HasValue)
+                return null;
+            var employee = _EmployeeData.GetById(id.Value)?.MapEmployeeView();
+            return employee;
+        }
 
         public IActionResult GetEmployees()
         {
-            return View(_Employees);
+            return View(_EmployeeData.GetAll().Select(e=>e.MapEmployeeView()));
         }
         public IActionResult GetEmployeeDetails(int? id)
         {
-            var employee = _Employees.FirstOrDefault(e => e.Id == id);
+            var employee = FindEmployee(id);
             if (employee is null)
                 return NotFound();
             return View(employee);
         }
+
+        public IActionResult AddEmployee() => View(new EmployeeView());
+        [HttpPost]
+        public IActionResult AddEmployee(EmployeeView newEmployee)
+        {
+            if (!ModelState.IsValid)
+                return View(newEmployee);
+
+            newEmployee.Id = _EmployeeData.Add(newEmployee.MapEmployee());
+            _EmployeeData.SaveChanges();
+
+            return RedirectToAction("GetEmployeeDetails", new { newEmployee.Id });
+        }
+
+        public IActionResult ModifyEmployee(int? id)
+        {
+            var employee = FindEmployee(id);
+            if (employee is null)
+                return NotFound();
+            return View(employee);
+        }
+
+        [HttpPost]
+        public IActionResult ModifyEmployee(EmployeeView employee)
+        {
+            if (!ModelState.IsValid)
+                return View(employee);
+
+            if (!_EmployeeData.Update(employee.Id, employee.MapEmployee()))
+                return View(employee);
+            
+            _EmployeeData.SaveChanges();
+            return RedirectToAction("GetEmployeeDetails", new { employee.Id });
+        }
+
+        public IActionResult DeleteEmployee(int? id)
+        {
+            var employee = FindEmployee(id);
+            if (employee is null)
+                return NotFound();
+            return View(employee);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteEmployee(EmployeeView employee)
+        {
+            if (!_EmployeeData.Remove(employee.Id))
+                return View(employee);
+
+            _EmployeeData.SaveChanges();
+            return RedirectToAction("GetEmployees");
+        }
+
     }
 }

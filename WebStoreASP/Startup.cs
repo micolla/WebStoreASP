@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebStore.Data.Interfaces;
+using WebStore.Data.DataProviders.InMemoryDataProvider;
+using WebStore.Data.InMemoryData;
 
 namespace WebStore
 {
@@ -19,6 +22,8 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<InMemoryDB>();
+            services.AddSingleton<IEmployeeDataProvider, EmployeeDataProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

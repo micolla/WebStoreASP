@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+п»їusing Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using WebStore.ViewModels;
 
@@ -19,15 +19,15 @@ namespace WebStoreTests
             var employeeView = new EmployeeView
                                     {
                                         Id = 1,
-                                        FirstName = "Николай",
-                                        LastName = "Донцов",
+                                        FirstName = "РќРёРєРѕР»Р°Р№",
+                                        LastName = "Р”РѕРЅС†РѕРІ",
                                         HiringDate = DateTime.Parse("2016-05-01"),
                                         BirthDay = DateTime.Parse("1990-12-22")
                                     };
             Assert.AreEqual<DateTime>(employeeView.HiringDate, DateTime.Parse("2016-05-01"));
             Assert.AreEqual<DateTime>(employeeView.BirthDay, DateTime.Parse("1990-12-22"));
-            Assert.AreEqual<String>(employeeView.FirstName, "Николай");
-            Assert.AreEqual<String>(employeeView.LastName, "Донцов");
+            Assert.AreEqual<String>(employeeView.FirstName, "РќРёРєРѕР»Р°Р№");
+            Assert.AreEqual<String>(employeeView.LastName, "Р”РѕРЅС†РѕРІ");
             Assert.AreEqual<int>(employeeView.Id, 1);
         }
     }
