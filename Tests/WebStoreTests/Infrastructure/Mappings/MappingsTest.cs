@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+п»їusing Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using WebStore.ViewModels;
 using WebStore.Data.Entity;
@@ -15,8 +15,8 @@ namespace WebStoreTests
             var employee = new Employee
             {
                 Id = 1,
-                FirstName = "Николай",
-                LastName = "Донцов",
+                FirstName = "РќРёРєРѕР»Р°Р№",
+                LastName = "Р”РѕРЅС†РѕРІ",
                 HiringDate = DateTime.Parse("2016-05-01"),
                 BirthDay = DateTime.Parse("1990-12-22")
             };
