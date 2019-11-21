@@ -9,56 +9,26 @@ namespace WebStore.Controllers
 {
     public class HomeController : Controller
     {
-        
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public IActionResult Page404()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
-        public IActionResult Blog()
-        {
-            return View();
-        }
+        public IActionResult Page404() => View();
 
-        public IActionResult BlogSingle()
-        {
-            return View();
-        }
+        public IActionResult Blog() => View();
 
-        public IActionResult Cart()
-        {
-            return View();
-        }
+        public IActionResult BlogSingle() => View();
 
-        public IActionResult Checkout()
-        {
-            return View();
-        }
+        public IActionResult Cart() => View();
 
-        public IActionResult ContactUs()
-        {
-            return View();
-        }
+        public IActionResult Checkout() => View();
 
-        public IActionResult Login()
-        {
-            return View();
-        }
+        public IActionResult ContactUs() => View();
 
-        public IActionResult ProductDetails()
-        {
-            return View();
-        }
+        public IActionResult Login() => View();
 
-        public IActionResult Shop()
-        {
-            return View();
-        }
+        public IActionResult ProductDetails() => View();
+
+        public IActionResult Shop() => View();
 
     }
 }
