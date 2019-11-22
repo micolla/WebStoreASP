@@ -32,5 +32,37 @@ namespace WebStore.Infrastructure.Mappings
                 BirthDay = employeeView.BirthDay
             };
         }
+
+        public static Brand MapBrandViewToBrand(this BrandViewModel brandViewModel)
+        {
+            return new Brand {
+                Id=brandViewModel.Id,
+                Name=brandViewModel.Name,
+                Order=brandViewModel.Order
+            };
+        }
+
+        public static BrandViewModel MapBrandToBrandView(this Brand brand)
+        {
+            return new BrandViewModel
+            {
+                Id = brand.Id,
+                Name = brand.Name,
+                Order = brand.Order
+            };
+        }
+
+        public static Section MapSectionViewToSection(this SectionViewModel sectionViewModel)
+        {
+            return new Section
+            {
+                Id = sectionViewModel.Id,
+                Name = sectionViewModel.Name,
+                Order = sectionViewModel.Order,
+                ParentId = sectionViewModel.ParentSection.Id,
+            };
+        }
+
+
     }
 }
