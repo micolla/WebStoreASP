@@ -24,6 +24,7 @@ namespace WebStore
             services.AddMvc();
             services.AddSingleton<InMemoryDB>();
             services.AddSingleton<IEmployeeDataProvider, EmployeeDataProvider>();
+            services.AddSingleton<IProductDataProvider, ProductDataProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
