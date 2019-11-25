@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebStore.Data.Interfaces;
+using WebStore.Model.Entity;
+using WebStore.Model.Interfaces;
 using WebStore.ViewModels;
 
 namespace WebStore.Controllers
@@ -17,7 +18,7 @@ namespace WebStore.Controllers
         }
         public IActionResult Shop(int? SectionId, int? BrandId)
         {
-            var products = _ProductData.GetProducts(new Data.Entity.ProductFilter { SectionId = SectionId, BrandId = BrandId });
+            var products = _ProductData.GetProducts(new ProductFilter { SectionId = SectionId, BrandId = BrandId });
             return View(new CatalogViewModel { 
                             BrandId=BrandId,
                             SectionId=SectionId,

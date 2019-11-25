@@ -1,6 +1,6 @@
 ﻿using System;
 using WebStore.ViewModels;
-using WebStore.Data.Entity;
+using WebStore.Model.Entity;
 
 namespace WebStore.Infrastructure.Mappings
 {

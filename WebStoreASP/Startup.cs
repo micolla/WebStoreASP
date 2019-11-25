@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebStore.Data.Interfaces;
-using WebStore.Data.DataProviders.InMemoryDataProvider;
-using WebStore.Data.InMemoryData;
+using WebStore.Model.Interfaces;
+using WebStore.DAL.DataProviders.MSSQLDataProvider;
+using WebStore.DAL.SQLDBData;
+using Microsoft.EntityFrameworkCore;
+using WebStore.DAL;
 
 namespace WebStore
 {
@@ -21,14 +23,18 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddDbContext<WebStoreDBContext>(opt=>
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
+            services.AddScoped<IProductDataProvider, ProductDataProvider>();
+            services.AddTransient<WebStoreDataInitialize>();
             services.AddMvc();
-            services.AddSingleton<InMemoryDB>();
-            services.AddSingleton<IEmployeeDataProvider, EmployeeDataProvider>();
-            services.AddSingleton<IProductDataProvider, ProductDataProvider>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDataInitialize webStoreDataInitialize)
         {
+            webStoreDataInitialize.InitialAsync().Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
