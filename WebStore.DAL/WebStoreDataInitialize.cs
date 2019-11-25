@@ -17,6 +17,8 @@ namespace WebStore.DAL
             
             await db.MigrateAsync(); // Автоматическое создание и миграция базы до последней версии
 
+            if (await _db.Products.AnyAsync()) return;
+
             using (var transaction = await db.BeginTransactionAsync())
             {
                 await _db.Brands.AddRangeAsync(new[]
@@ -99,8 +101,6 @@ namespace WebStore.DAL
 
                 transaction.Commit();
             }
-
-            if (await _db.Products.AnyAsync()) return;
 
             using (var transaction = await db.BeginTransactionAsync())
             {
