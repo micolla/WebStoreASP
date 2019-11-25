@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebStore.Model.Base;
+using WebStore.Model.Entity.Base;
 
 namespace WebStore.Model.Entity
 {

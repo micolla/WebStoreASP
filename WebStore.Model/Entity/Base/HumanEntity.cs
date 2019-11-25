@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebStore.Model.Base
+namespace WebStore.Model.Entity.Base
 {
     public abstract class HumanEntity : BaseEntity
     {
