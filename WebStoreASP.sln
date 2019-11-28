@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Model", "WebStore.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Data", "WebStore.Data\WebStore.Data.csproj", "{6BF3400A-9A72-4543-AFB9-E865C2F81D10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.DAL", "WebStore.DAL\WebStore.DAL.csproj", "{A5FA6336-0572-400E-B3A4-BD4A399B0063}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{6BF3400A-9A72-4543-AFB9-E865C2F81D10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BF3400A-9A72-4543-AFB9-E865C2F81D10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BF3400A-9A72-4543-AFB9-E865C2F81D10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5FA6336-0572-400E-B3A4-BD4A399B0063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5FA6336-0572-400E-B3A4-BD4A399B0063}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5FA6336-0572-400E-B3A4-BD4A399B0063}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5FA6336-0572-400E-B3A4-BD4A399B0063}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

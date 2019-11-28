@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.ViewModels;
-using WebStore.Data.Interfaces;
+using WebStore.Model.Interfaces;
 using WebStore.Infrastructure.Mappings;
 
 namespace WebStore.Controllers
@@ -45,7 +45,6 @@ namespace WebStore.Controllers
                 return View(newEmployee);
 
             newEmployee.Id = _EmployeeData.Add(newEmployee.MapEmployee());
-            _EmployeeData.SaveChanges();
 
             return RedirectToAction("GetEmployeeDetails", new { newEmployee.Id });
         }
@@ -67,7 +66,6 @@ namespace WebStore.Controllers
             if (!_EmployeeData.Update(employee.Id, employee.MapEmployee()))
                 return View(employee);
             
-            _EmployeeData.SaveChanges();
             return RedirectToAction("GetEmployeeDetails", new { employee.Id });
         }
 
@@ -85,7 +83,6 @@ namespace WebStore.Controllers
             if (!_EmployeeData.Remove(employee.Id))
                 return View(employee);
 
-            _EmployeeData.SaveChanges();
             return RedirectToAction("GetEmployees");
         }
 
