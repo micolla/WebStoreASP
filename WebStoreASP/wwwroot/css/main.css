@@ -4,13 +4,12 @@
 **************************/
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
-@import url(http://fonts.googleapis.com/css?family=Abel);
+@import url('https://fonts.googleapis.com/css?family=Abel&display=swap');
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
   position: relative;
-  font-weight:400px;
+  font-weight: 40px;
 }
 
 ul li {
@@ -899,7 +898,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
+  opacity: 0.5;
 }
 
 .single-products:hover .product-overlay {
@@ -2141,7 +2140,7 @@ h2.title {
 
 .rating-area {
   border: 1px solid #F7F7F0;
-  direction: block;
+  display: block;
   overflow: hidden;
 }
 
