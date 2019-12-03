@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.SQLDBData;
 using WebStore.Model.Entity;
 using WebStore.Model.Interfaces;
@@ -10,7 +12,13 @@ namespace WebStore.DAL.DataProviders.MSSQLDataProvider
     {
         WebStoreDBContext _db;
         public ProductDataProvider(WebStoreDBContext db) => _db = db;
-        public IEnumerable<Brand> GetBrands() => _db.Brands;
+        public IEnumerable<Brand> GetBrands() => _db.Brands.Include(b=>b.Products).AsEnumerable();
+
+        public Product GetProductById(int productId) =>
+            _db.Products
+                .Include(p => p.Brand)
+                .Include(p => p.Section)
+                .FirstOrDefault(p => p.Id == productId);
 
         public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
         {
@@ -22,10 +30,16 @@ namespace WebStore.DAL.DataProviders.MSSQLDataProvider
             if (Filter?.BrandId != null)
                 query = query.Where(product => product.BrandId == Filter.BrandId);
 
-            return query.AsEnumerable<Product>();
+            return query
+                .Include(p => p.Brand)
+                .Include(p => p.Section)
+                .AsEnumerable<Product>();
         }
 
-        public IEnumerable<Section> GetSections() => _db.Sections;
+        public IEnumerable<Section> GetSections() => 
+            _db.Sections
+            .Include(s=>s.Products)
+            .AsEnumerable();
 
     }
 }
