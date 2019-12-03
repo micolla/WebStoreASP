@@ -66,6 +66,7 @@ namespace WebStore
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDataInitialize webStoreDataInitialize)
         {
             webStoreDataInitialize.InitialAsync().Wait();
+            webStoreDataInitialize.IdentityInitialAsync().Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

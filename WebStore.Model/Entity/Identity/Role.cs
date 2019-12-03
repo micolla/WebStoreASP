@@ -2,5 +2,11 @@
 
 namespace WebStore.Model.Entity.Identity
 {
-    public class Role : IdentityRole { }
+    public class Role : IdentityRole {
+        public enum Roles
+        {
+            Administrator,
+            User
+        }
+    }
 }
