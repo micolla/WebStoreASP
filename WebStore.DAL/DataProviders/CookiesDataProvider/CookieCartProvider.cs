@@ -83,5 +83,11 @@ namespace WebStore.DAL.DataProviders.CookiesDataProvider
             cart.Items.Remove(product);
             Cart = cart;
         }
+
+        public IEnumerable<CartItem> GetCartItems()
+        {
+            var cart = Cart;
+            return cart.Items;
+        }
     }
 }
