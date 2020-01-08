@@ -50,7 +50,7 @@ namespace WebStore.DAL.DataProviders.CookiesDataProvider
         public void AddToCart(int productId)
         {
             var cart = Cart;
-            var product=cart.Items.FirstOrDefault(p => p.ProductId == productId);
+            var product=cart.Items?.FirstOrDefault(p => p.ProductId == productId);
             if (product is null)
                 cart.Items.Add(new CartItem { ProductId = productId, Quantity = 1 });
             else

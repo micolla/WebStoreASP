@@ -30,6 +30,9 @@ namespace WebStore.DAL.DataProviders.MSSQLDataProvider
             if (Filter?.BrandId != null)
                 query = query.Where(product => product.BrandId == Filter.BrandId);
 
+            if (Filter?.Ids != null)
+                query = query.Where(product =>Filter.Ids.Any(i=>i==product.Id));
+
             return query
                 .Include(p => p.Brand)
                 .Include(p => p.Section)

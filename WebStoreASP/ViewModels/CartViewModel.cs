@@ -7,7 +7,7 @@ namespace WebStore.ViewModels
 {
     public class CartViewModel
     {
-        public Dictionary<ProductViewModel, int> Items { get; set; } = new Dictionary<ProductViewModel, int>();
-        public int ItemsCount => Items?.Sum(item => item.Value) ?? 0;
+        public List<CartItemViewModel> Items { get; set; } = new List<CartItemViewModel>();
+        public int ItemsCount => Items?.Sum(item => item.Amount) ?? 0;
     }
 }

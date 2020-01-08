@@ -8,5 +8,10 @@ namespace WebStore.Model.Entity
     {
         public List<CartItem> Items { get; set; }
         public int ItemsCount => Items?.Sum(i => i.Quantity) ?? 0;
+
+        public Cart() : base()
+        {
+            Items = new List<CartItem>();
+        }
     }
 }
