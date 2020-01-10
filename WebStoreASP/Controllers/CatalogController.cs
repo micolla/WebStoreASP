@@ -33,9 +33,20 @@ namespace WebStore.Controllers
                             });
         }
 
-        public IActionResult ProductDetails()
+        public IActionResult ProductDetails(int? productId)
         {
-            return View();
+            if (!productId.HasValue)
+                return NotFound();
+            var product = _ProductData.GetProductById(productId.Value);
+            return View(new ProductViewModel
+                                {
+                                    Id = product.Id,
+                                    Name = product.Name,
+                                    ImageUrl = product.ImageUrl,
+                                    Order = product.Order,
+                                    Price = product.Price,
+                                    Brand=product.Brand.Name
+                                });
         }
     }
 }

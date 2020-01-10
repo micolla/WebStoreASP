@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.ViewModels;
 using WebStore.Model.Interfaces;
 using WebStore.Infrastructure.Mappings;
+using Microsoft.AspNetCore.Authorization;
+using WebStore.Model.Entity.Identity;
 
 namespace WebStore.Controllers
 {
@@ -48,7 +50,7 @@ namespace WebStore.Controllers
 
             return RedirectToAction("GetEmployeeDetails", new { newEmployee.Id });
         }
-
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult ModifyEmployee(int? id)
         {
             var employee = FindEmployee(id);
@@ -58,6 +60,7 @@ namespace WebStore.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult ModifyEmployee(EmployeeView employee)
         {
             if (!ModelState.IsValid)
@@ -68,7 +71,7 @@ namespace WebStore.Controllers
             
             return RedirectToAction("GetEmployeeDetails", new { employee.Id });
         }
-
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult DeleteEmployee(int? id)
         {
             var employee = FindEmployee(id);
@@ -78,6 +81,7 @@ namespace WebStore.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult DeleteEmployee(EmployeeView employee)
         {
             if (!_EmployeeData.Remove(employee.Id))

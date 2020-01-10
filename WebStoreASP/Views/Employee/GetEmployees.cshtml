@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebStore.ViewModels.EmployeeView>
+@using WebStore.Model.Entity.Identity
 
 <!DOCTYPE html>
 
@@ -9,7 +10,10 @@
 </head>
 <body>
     <h1>Список сотрудников</h1>
-    <a asp-action="AddEmployee">Принять сотрудника<i class="fa fa-plus-circle"></i></a>
+    @if (User.IsInRole(Role.Administrator))
+    {
+        <a asp-action="AddEmployee">Принять сотрудника<i class="fa fa-plus-circle"></i></a>
+    }
     <table class="table">
         <thead>
             <tr>
@@ -27,8 +31,11 @@
                     <td>@employee.LastName</td>
                     <td>
                         <a asp-action="GetEmployeeDetails" asp-route-Id="@employee.Id"><i class="fa fa-info-circle"></i></a>
-                        <a asp-action="ModifyEmployee" asp-route-Id="@employee.Id"><i class="fa fa-user-edit"></i></a>
-                        <a asp-action="DeleteEmployee" asp-route-Id="@employee.Id"><i class="fa fa-trash text-danger"></i></a>
+                        @if (User.IsInRole(Role.Administrator))
+                        {
+                            <a asp-action="ModifyEmployee" asp-route-Id="@employee.Id"><i class="fa fa-user-edit"></i></a>
+                            <a asp-action="DeleteEmployee" asp-route-Id="@employee.Id"><i class="fa fa-trash text-danger"></i></a>
+                        }
                     </td>
                 </tr>
             }

@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using WebStore.DAL;
 using WebStore.Model.Entity.Identity;
 using Microsoft.AspNetCore.Identity;
+using WebStore.DAL.DataProviders.CookiesDataProvider;
 
 namespace WebStore
 {
@@ -30,6 +31,7 @@ namespace WebStore
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
+            services.AddScoped<ICartDataProvider, CookieCartProvider>();
             services.AddTransient<WebStoreDataInitialize>();
 
             services.AddIdentity<User, Role>()
@@ -66,6 +68,7 @@ namespace WebStore
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDataInitialize webStoreDataInitialize)
         {
             webStoreDataInitialize.InitialAsync().Wait();
+            webStoreDataInitialize.IdentityInitialAsync().Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

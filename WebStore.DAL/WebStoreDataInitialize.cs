@@ -1,15 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.SQLDBData;
 using WebStore.Model.Entity;
+using WebStore.Model.Entity.Identity;
 
 namespace WebStore.DAL
 {
     public class WebStoreDataInitialize
     {
         private readonly WebStoreDBContext _db;
-        public WebStoreDataInitialize(WebStoreDBContext db) => _db = db;
+        private readonly RoleManager<Role> _RoleManager;
+        private readonly UserManager<User> _UserManager;
+
+        public WebStoreDataInitialize(WebStoreDBContext db, RoleManager<Role> roleManager,UserManager<User> userManager)
+        {
+            _db = db;
+            _RoleManager = roleManager;
+            _UserManager = userManager;
+        }
+
+        
 
         public async Task InitialAsync()
         {
@@ -124,6 +137,30 @@ namespace WebStore.DAL
                 await db.ExecuteSqlCommandAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
 
                 transaction.Commit();
+            }
+
+        }
+        public async Task IdentityInitialAsync()
+        {
+            if (!await _RoleManager.RoleExistsAsync(Role.Administrator))
+                await _RoleManager.CreateAsync(new Role
+                                                        {
+                                                            Name = Role.Administrator
+                                                        });
+            if (!await _RoleManager.RoleExistsAsync(Role.User))
+                await _RoleManager.CreateAsync(new Role
+                                                        {
+                                                            Name = Role.User
+                                                        });
+
+            if(await _UserManager.FindByNameAsync(User.AdminUserName) is null)
+            {
+                User adminUser = new User { UserName = User.AdminUserName };
+                var adminUserResult = await _UserManager.CreateAsync(adminUser, User.AdminDefaultPassword);
+                if (adminUserResult.Succeeded)
+                    await _UserManager.AddToRoleAsync(adminUser, Role.Administrator);
+                else
+                    throw new InvalidOperationException($"Ошибка при создании администратора в БД {string.Join(", ", adminUserResult.Errors.Select(e => e.Description))}");
             }
 
         }
