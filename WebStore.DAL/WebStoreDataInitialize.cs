@@ -142,15 +142,15 @@ namespace WebStore.DAL
         }
         public async Task IdentityInitialAsync()
         {
-            if (!await _RoleManager.RoleExistsAsync(Role.Roles.Administrator.ToString()))
+            if (!await _RoleManager.RoleExistsAsync(Role.Administrator))
                 await _RoleManager.CreateAsync(new Role
                                                         {
-                                                            Name = Role.Roles.Administrator.ToString()
+                                                            Name = Role.Administrator
                                                         });
-            if (!await _RoleManager.RoleExistsAsync(Role.Roles.User.ToString()))
+            if (!await _RoleManager.RoleExistsAsync(Role.User))
                 await _RoleManager.CreateAsync(new Role
                                                         {
-                                                            Name = Role.Roles.User.ToString()
+                                                            Name = Role.User
                                                         });
 
             if(await _UserManager.FindByNameAsync(User.AdminUserName) is null)
@@ -158,7 +158,7 @@ namespace WebStore.DAL
                 User adminUser = new User { UserName = User.AdminUserName };
                 var adminUserResult = await _UserManager.CreateAsync(adminUser, User.AdminDefaultPassword);
                 if (adminUserResult.Succeeded)
-                    await _UserManager.AddToRoleAsync(adminUser, Role.Roles.Administrator.ToString());
+                    await _UserManager.AddToRoleAsync(adminUser, Role.Administrator);
                 else
                     throw new InvalidOperationException($"Ошибка при создании администратора в БД {string.Join(", ", adminUserResult.Errors.Select(e => e.Description))}");
             }
