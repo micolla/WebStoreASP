@@ -32,6 +32,7 @@ namespace WebStore
             services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
             services.AddScoped<ICartDataProvider, CookieCartProvider>();
+            services.AddScoped<IOrderDataProvider, OrderDataProvider>();
             services.AddTransient<WebStoreDataInitialize>();
 
             services.AddIdentity<User, Role>()
