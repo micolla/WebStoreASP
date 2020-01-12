@@ -11,6 +11,7 @@ using WebStore.Model.Entity.Identity;
 
 namespace WebStore.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         IEmployeeDataProvider _EmployeeData;
