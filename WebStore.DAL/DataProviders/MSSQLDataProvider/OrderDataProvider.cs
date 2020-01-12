@@ -14,16 +14,13 @@ namespace WebStore.DAL.DataProviders.MSSQLDataProvider
     public class OrderDataProvider : IOrderDataProvider
     {
         private readonly WebStoreDBContext db;
-        private readonly UserManager<User> userManager;
 
-        public OrderDataProvider(WebStoreDBContext dbContext, UserManager<User> userManager)
+        public OrderDataProvider(WebStoreDBContext dbContext)
         {
             this.db = dbContext;
-            this.userManager = userManager;
         }
         public async Task<Order> CreateOrderAsync(Order OrderModel, Cart CartModel, string UserName)
         {
-            var user = await userManager.FindByNameAsync(UserName);
 
             using(var transaction = await db.Database.BeginTransactionAsync())
             {

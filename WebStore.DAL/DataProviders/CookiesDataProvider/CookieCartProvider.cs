@@ -14,7 +14,7 @@ namespace WebStore.DAL.DataProviders.CookiesDataProvider
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string _cartName;
 
-        private Cart Cart 
+        public Cart Cart 
         {
             get 
             {
@@ -31,7 +31,7 @@ namespace WebStore.DAL.DataProviders.CookiesDataProvider
                 ReplaceCookie(cookies, cart_cookie);
                 return JsonConvert.DeserializeObject<Cart>(cart_cookie);
             }
-            set => ReplaceCookie(_httpContextAccessor.HttpContext.Response.Cookies, JsonConvert.SerializeObject(value));
+            private set => ReplaceCookie(_httpContextAccessor.HttpContext.Response.Cookies, JsonConvert.SerializeObject(value));
         }
         private void ReplaceCookie(IResponseCookies cookies, string cookie)
         {
