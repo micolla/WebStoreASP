@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebStore.ViewModels
 {
-    public class UserOrderView
+    public class UserOrderViewModel
     {
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
