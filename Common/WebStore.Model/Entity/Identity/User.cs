@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebStore.Model.Entity.Identity
+namespace WebStore.Domain.Entity.Identity
 {
     public class User : IdentityUser 
     {

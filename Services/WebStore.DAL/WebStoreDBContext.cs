@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WebStore.Model.Entity;
-using WebStore.Model.Entity.Identity;
+using WebStore.Domain.Entity;
+using WebStore.Domain.Entity.Identity;
 
 namespace WebStore.DAL.SQLDBData
 {

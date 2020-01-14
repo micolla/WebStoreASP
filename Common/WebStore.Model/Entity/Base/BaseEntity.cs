@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WebStore.Model.Entity.Base.Interfaces;
+﻿using WebStore.Domain.Entity.Base.Interfaces;
 
-namespace WebStore.Model.Entity.Base
+namespace WebStore.Domain.Entity.Base
 {
     public abstract class BaseEntity : IBaseEntity
     {

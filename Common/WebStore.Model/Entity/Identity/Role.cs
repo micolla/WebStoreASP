@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace WebStore.Model.Entity.Identity
+namespace WebStore.Domain.Entity.Identity
 {
     public class Role : IdentityRole {
         public const string Administrator = "Administrator";

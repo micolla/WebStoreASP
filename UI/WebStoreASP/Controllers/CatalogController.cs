@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebStore.Model.Entity;
-using WebStore.Model.Interfaces;
-using WebStore.ViewModels;
+using WebStore.Domain.Entity;
+using WebStore.Interfaces.DataProviders;
+using WebStore.Domain.ViewModels;
 
 namespace WebStore.Controllers
 {

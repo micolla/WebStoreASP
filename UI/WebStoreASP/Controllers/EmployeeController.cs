@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebStore.ViewModels;
-using WebStore.Model.Interfaces;
+using WebStore.Domain.ViewModels;
+using WebStore.Interfaces.DataProviders;
 using WebStore.Infrastructure.Mappings;
 using Microsoft.AspNetCore.Authorization;
-using WebStore.Model.Entity.Identity;
+using WebStore.Domain.Entity.Identity;
 
 namespace WebStore.Controllers
 {

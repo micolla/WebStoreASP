@@ -1,4 +1,4 @@
-﻿namespace WebStore.Model.Entity.Base.Interfaces
+﻿namespace WebStore.Domain.Entity.Base.Interfaces
 {
     /// <summary>Именованная сущность</summary>
     public interface INamedEntity : IBaseEntity

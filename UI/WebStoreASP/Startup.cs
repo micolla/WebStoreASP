@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebStore.Model.Interfaces;
-using WebStore.DAL.DataProviders.MSSQLDataProvider;
+using WebStore.Interfaces.DataProviders;
+using WebStore.Services.DataProviders.MSSQLDataProvider;
 using WebStore.DAL.SQLDBData;
 using Microsoft.EntityFrameworkCore;
-using WebStore.DAL;
-using WebStore.Model.Entity.Identity;
+using WebStore.Domain.Entity.Identity;
 using Microsoft.AspNetCore.Identity;
-using WebStore.DAL.DataProviders.CookiesDataProvider;
+using WebStore.Services.Database;
+using WebStore.Services.DataProviders.CookiesDataProvider;
 
 namespace WebStore
 {

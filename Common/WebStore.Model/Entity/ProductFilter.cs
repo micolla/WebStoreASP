@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebStore.Model.Entity
+namespace WebStore.Domain.Entity
 {
     public class ProductFilter
     {

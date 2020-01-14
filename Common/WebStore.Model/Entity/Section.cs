@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using WebStore.Model.Entity.Base;
-using WebStore.Model.Entity.Base.Interfaces;
+using WebStore.Domain.Entity.Base;
+using WebStore.Domain.Entity.Base.Interfaces;
 
-namespace WebStore.Model.Entity
+namespace WebStore.Domain.Entity
 {
     public class Section : NamedEntity, IOrderedEntity
     {

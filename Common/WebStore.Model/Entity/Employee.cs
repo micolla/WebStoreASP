@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebStore.Model.Entity.Base;
+using WebStore.Domain.Entity.Base;
 
-namespace WebStore.Model.Entity
+namespace WebStore.Domain.Entity
 {
     public class Employee : HumanEntity
     {

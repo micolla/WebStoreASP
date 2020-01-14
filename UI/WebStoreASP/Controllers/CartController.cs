@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebStore.Model.Entity.Identity;
-using WebStore.Model.Interfaces;
-using WebStore.ViewModels;
+using WebStore.Domain.Entity.Identity;
+using WebStore.Interfaces.DataProviders;
+using WebStore.Domain.ViewModels;
 
 namespace WebStore.Controllers
 {
@@ -28,7 +28,7 @@ namespace WebStore.Controllers
         {
             var cartItems = _cartDataProvider.GetCartItems();
             if (cartItems == null) return new CartViewModel();
-            var products = _productDataProvider.GetProducts(new Model.Entity.ProductFilter
+            var products = _productDataProvider.GetProducts(new Domain.Entity.ProductFilter
             { Ids = cartItems.Select(i => i.ProductId) }).ToList();
             return new CartViewModel
             {
@@ -71,7 +71,7 @@ namespace WebStore.Controllers
                 });
             var user = await userManager.FindByNameAsync(User.Identity.Name);
             var order = await OrderService.CreateOrderAsync(
-                new Model.Entity.Order
+                new Domain.Entity.Order
                 {
                     Address = Model.Address,
                     Phone = Model.Phone,

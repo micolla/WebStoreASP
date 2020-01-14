@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using WebStore.Model.Entity.Base;
-using WebStore.Model.Entity.Identity;
+using WebStore.Domain.Entity.Base;
+using WebStore.Domain.Entity.Identity;
 
-namespace WebStore.Model.Entity
+namespace WebStore.Domain.Entity
 {
     public class Order : BaseEntity
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using WebStore.ViewModels;
+using WebStore.Domain.ViewModels;
 
 namespace WebStoreTests
 {
