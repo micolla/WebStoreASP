@@ -5,7 +5,7 @@
   },
   {
     "outputFileName": "wwwroot/js/site.js",
-    "inputFiles": [ "wwwroot/js/main.js", "wwwroot/js/price-range.js", "wwwroot/js/gmaps.js", "wwwroot/js/.js" ],
+    "inputFiles": [ "wwwroot/js/main.js", "wwwroot/js/price-range.js", "wwwroot/js/gmaps.js"],
     "minify": {
       "enabled": true,
       "renameLocals": true

@@ -12,5 +12,6 @@ namespace WebStore.Model.Interfaces
         void DecreaseFromCart(int productId);
         void DeleteFromCart(int productId);
         void ClearCart();
+        Cart Cart { get; }
     }
 }

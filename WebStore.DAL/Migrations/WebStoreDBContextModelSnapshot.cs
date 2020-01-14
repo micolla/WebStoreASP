@@ -219,6 +219,55 @@ namespace WebStore.DAL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("WebStore.Model.Entity.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("WebStore.Model.Entity.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("WebStore.Model.Entity.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -310,6 +359,27 @@ namespace WebStore.DAL.Migrations
                     b.HasOne("WebStore.Model.Entity.Identity.User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WebStore.Model.Entity.Order", b =>
+                {
+                    b.HasOne("WebStore.Model.Entity.Identity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WebStore.Model.Entity.OrderItem", b =>
+                {
+                    b.HasOne("WebStore.Model.Entity.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WebStore.Model.Entity.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

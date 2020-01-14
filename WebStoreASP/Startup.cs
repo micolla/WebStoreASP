@@ -32,6 +32,7 @@ namespace WebStore
             services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
             services.AddScoped<ICartDataProvider, CookieCartProvider>();
+            services.AddScoped<IOrderDataProvider, OrderDataProvider>();
             services.AddTransient<WebStoreDataInitialize>();
 
             services.AddIdentity<User, Role>()
@@ -55,8 +56,8 @@ namespace WebStore
                     opt.Cookie.HttpOnly = true;
                     opt.Cookie.Expiration = TimeSpan.FromDays(120);
                     
-                    opt.LoginPath = "/Action/Login";
-                    opt.LogoutPath = "/Action/Logout";
+                    opt.LoginPath = "/Account/Login";
+                    opt.LogoutPath = "/Account/Logout";
                     opt.AccessDeniedPath = "/Account/AccessDenided";
                     opt.SlidingExpiration = true;
                 }
@@ -83,8 +84,12 @@ namespace WebStore
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
