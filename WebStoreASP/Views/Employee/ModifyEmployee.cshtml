@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = $"Изменение данных сотрудника {Model.FirstName} {Model.LastName}";
+}
+
+<h4>@ViewData["Title"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ModifyEmployee">
+            <partial name="Partial/_EmployeeForm"/>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetEmployees">Назад к списку сотрудников</a>
+</div>
+
