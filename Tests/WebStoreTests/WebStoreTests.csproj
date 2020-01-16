@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WebStoreASP\WebStore.csproj" />
+    <ProjectReference Include="..\..\Common\WebStore.Model\WebStore.Domain.csproj" />
+    <ProjectReference Include="..\..\UI\WebStoreASP\WebStore.csproj" />
   </ItemGroup>
 
 </Project>

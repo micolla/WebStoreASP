@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using WebStore.ViewModels;
-using WebStore.Model.Entity;
+using WebStore.Domain.ViewModels;
+using WebStore.Domain.Entity;
 using WebStore.Infrastructure.Mappings;
 
 namespace WebStoreTests
