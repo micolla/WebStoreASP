@@ -8,7 +8,7 @@ namespace WebStore.Clients.Base
     public abstract class BaseClient : IDisposable
     {
         protected readonly HttpClient _Client;
-        private readonly string _ServiceAddress;
+        protected readonly string _ServiceAddress;
 
         public BaseClient(IConfiguration config, String ServiceAddress)
         {

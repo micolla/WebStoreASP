@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore.Interfaces.DataProviders;
+using WebStore.Interfaces.Api;
 using WebStore.Services.DataProviders.MSSQLDataProvider;
 using WebStore.DAL.SQLDBData;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using WebStore.Domain.Entity.Identity;
 using Microsoft.AspNetCore.Identity;
 using WebStore.Services.Database;
 using WebStore.Services.DataProviders.CookiesDataProvider;
+using WebStore.Clients.Values;
 
 namespace WebStore
 {
@@ -30,6 +32,8 @@ namespace WebStore
             services.AddScoped<ICartDataProvider, CookieCartProvider>();
             services.AddScoped<IOrderDataProvider, OrderDataProvider>();
             services.AddTransient<WebStoreDataInitialize>();
+
+            services.AddTransient<IValuesService, ValuesClient>();
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<WebStoreDBContext>()
