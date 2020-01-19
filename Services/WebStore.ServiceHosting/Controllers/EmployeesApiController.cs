@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entity;
+using WebStore.Interfaces.Api;
 using WebStore.Interfaces.DataProviders;
 
 namespace WebStore.ServiceHosting.Controllers
 {
     [Route("api/employees")]
     [ApiController]
-    public class EmployeesApiController : ControllerBase, IEmployeeDataProvider
+    public class EmployeesApiController : ControllerBase, IEmployeeService
     {
         private readonly IEmployeeDataProvider _employeeDataProvider;
 

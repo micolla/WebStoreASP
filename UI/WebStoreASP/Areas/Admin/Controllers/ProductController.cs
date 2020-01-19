@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebStore.Interfaces.DataProviders;
+using WebStore.Interfaces.Api;
 using WebStore.Domain.ViewModels;
 
 namespace WebStore.Areas.Admin.Controllers
@@ -11,9 +11,9 @@ namespace WebStore.Areas.Admin.Controllers
     [Area("Admin")]
     public class ProductController : Controller
     {
-        private readonly IProductDataProvider _productData;
+        private readonly IProductService _productData;
 
-        public ProductController(IProductDataProvider productData)
+        public ProductController(IProductService productData)
         {
             _productData = productData;
         }

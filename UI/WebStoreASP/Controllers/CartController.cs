@@ -5,21 +5,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entity.Identity;
-using WebStore.Interfaces.DataProviders;
 using WebStore.Domain.ViewModels;
+using WebStore.Interfaces.DataProviders;
+using WebStore.Interfaces.Api;
 
 namespace WebStore.Controllers
 {
     public class CartController : Controller
     {
         private readonly ICartDataProvider _cartDataProvider;
-        private readonly IProductDataProvider _productDataProvider;
+        private readonly IProductService _productData;
         private readonly UserManager<User> userManager;
 
-        public CartController(ICartDataProvider cartDataProvider, IProductDataProvider productDataProvider, UserManager<User> userManager)
+        public CartController(ICartDataProvider cartDataProvider, IProductService productDataProvider, UserManager<User> userManager)
         {
             _cartDataProvider = cartDataProvider;
-            _productDataProvider = productDataProvider;
+            _productData = productDataProvider;
             this.userManager = userManager;
         }
         public IActionResult Details() => View(new DetailsCartViewModel { CartViewModel = GetCartViewModel(), OrderViewModel = new OrderViewModel() });
@@ -28,7 +29,7 @@ namespace WebStore.Controllers
         {
             var cartItems = _cartDataProvider.GetCartItems();
             if (cartItems == null) return new CartViewModel();
-            var products = _productDataProvider.GetProducts(new Domain.Entity.ProductFilter
+            var products = _productData.GetProducts(new Domain.Entity.ProductFilter
             { Ids = cartItems.Select(i => i.ProductId) }).ToList();
             return new CartViewModel
             {

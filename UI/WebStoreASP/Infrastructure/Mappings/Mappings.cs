@@ -1,6 +1,7 @@
 ﻿using System;
 using WebStore.Domain.ViewModels;
 using WebStore.Domain.Entity;
+using WebStore.Domain.DTO.Products;
 
 namespace WebStore.Infrastructure.Mappings
 {
@@ -39,6 +40,15 @@ namespace WebStore.Infrastructure.Mappings
                 Id=brandViewModel.Id,
                 Name=brandViewModel.Name,
                 Order=brandViewModel.Order
+            };
+        }
+
+        public static BrandViewModel MapBrandDTOToBrandView(this BrandDTO brand)
+        {
+            return new BrandViewModel
+            {
+                Id = brand.Id,
+                Name = brand.Name
             };
         }
 

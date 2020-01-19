@@ -40,7 +40,7 @@ namespace WebStore.Services.DataProviders.MSSQLDataProvider
 
         public IEnumerable<Section> GetSections() => 
             _db.Sections
-            .Include(s=>s.Products)
+            //.Include(s=>s.Products)
             .AsEnumerable();
 
     }
