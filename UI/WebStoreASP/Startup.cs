@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using WebStore.Services.Database;
 using WebStore.Services.DataProviders.CookiesDataProvider;
 using WebStore.Clients.Values;
+using WebStore.Clients.Employees;
 
 namespace WebStore
 {
@@ -27,7 +28,7 @@ namespace WebStore
             
             services.AddDbContext<WebStoreDBContext>(opt=>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
+            services.AddScoped<IEmployeeDataProvider, EmployeesClient>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
             services.AddScoped<ICartDataProvider, CookieCartProvider>();
             services.AddScoped<IOrderDataProvider, OrderDataProvider>();
