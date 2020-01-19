@@ -1,15 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using WebStore.Clients.Base;
 using WebStore.Domain.Entity;
-using WebStore.Interfaces.DataProviders;
+using WebStore.Interfaces.Api;
 
 namespace WebStore.Clients.Employees
 {
-    public class EmployeesClient : BaseClient, IEmployeeDataProvider
+    public class EmployeesClient : BaseClient, IEmployeeService
     {
         public EmployeesClient(IConfiguration config) : base(config, "api/employees") { }
 
