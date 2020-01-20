@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entity.Identity;
 using WebStore.Interfaces.DataProviders;
 using WebStore.Domain.ViewModels;
+using WebStore.Interfaces.Api;
 
 namespace WebStore.Controllers
 {
@@ -67,7 +68,7 @@ namespace WebStore.Controllers
             return RedirectToAction(nameof(Index), profileViewModel);
         }
 
-        public IActionResult UserOrders([FromServices] IOrderDataProvider orderDataProvider) => View(orderDataProvider
+        public IActionResult UserOrders([FromServices] IOrderService orderDataProvider) => View(orderDataProvider
                 .GetUserOrders(User.Identity.Name)
                 .Select(order => new UserOrderViewModel
                 {

@@ -8,6 +8,7 @@ using WebStore.Domain.Entity.Identity;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.DataProviders;
 using WebStore.Interfaces.Api;
+using WebStore.Domain.DTO.Identity;
 
 namespace WebStore.Controllers
 {
@@ -62,7 +63,7 @@ namespace WebStore.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> CheckOutAsync(OrderViewModel Model, [FromServices] IOrderDataProvider OrderService)
+        public async Task<IActionResult> CheckOutAsync(OrderViewModel Model, [FromServices] IOrderService OrderService)
         {
             if (!ModelState.IsValid)
                 return View(nameof(Details), new DetailsCartViewModel
@@ -72,14 +73,19 @@ namespace WebStore.Controllers
                 });
             var user = await userManager.FindByNameAsync(User.Identity.Name);
             var order = await OrderService.CreateOrderAsync(
-                new Domain.Entity.Order
+                new Domain.DTO.Orders.OrderDTO
                 {
                     Address = Model.Address,
                     Phone = Model.Phone,
-                    User = user,
-                    Date = DateTime.Now
+                    Date = DateTime.Now,
+                    OrderItems = _cartDataProvider.Cart.Items.Select(i => 
+                        new Domain.DTO.Orders.OrderItemDTO
+                        {
+                            ProductId = i.ProductId,
+                            Quantity = i.Quantity
+                        })
                 },
-                _cartDataProvider.Cart, User.Identity.Name);
+                User.Identity.Name);
 
             _cartDataProvider.ClearCart();
 

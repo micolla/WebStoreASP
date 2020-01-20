@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore.DAL.SQLDBData;
+using WebStore.Domain.Entity.Identity;
 using WebStore.Interfaces.DataProviders;
 using WebStore.Services.Database;
 using WebStore.Services.DataProviders.MSSQLDataProvider;
@@ -26,6 +28,10 @@ namespace WebStore.ServiceHosting
             //services.AddScoped<ICartDataProvider, CookieCartProvider>();
             services.AddScoped<IOrderDataProvider, OrderDataProvider>();
             services.AddTransient<WebStoreDataInitialize>();
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<WebStoreDBContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

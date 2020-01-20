@@ -15,6 +15,7 @@ using WebStore.Services.DataProviders.CookiesDataProvider;
 using WebStore.Clients.Values;
 using WebStore.Clients.Employees;
 using WebStore.Clients.Products;
+using WebStore.Clients.Orders;
 
 namespace WebStore
 {
@@ -33,7 +34,7 @@ namespace WebStore
             services.AddScoped<IProductService, ProductsClient>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
             services.AddScoped<ICartDataProvider, CookieCartProvider>();
-            services.AddScoped<IOrderDataProvider, OrderDataProvider>();
+            services.AddScoped<IOrderService, OrdersClient>();
             services.AddTransient<WebStoreDataInitialize>();
 
             services.AddTransient<IValuesService, ValuesClient>();
