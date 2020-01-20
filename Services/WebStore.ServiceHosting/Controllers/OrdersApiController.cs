@@ -17,9 +17,11 @@ namespace WebStore.ServiceHosting.Controllers
         private readonly IOrderDataProvider _orderDataProvider;
 
         public OrdersApiController(IOrderDataProvider orderDataProvider) => _orderDataProvider = orderDataProvider;
+        
+        [HttpPost("{UserName?}")]
         public async Task<OrderDTO> CreateOrderAsync(OrderDTO orderDTO, string UserName)
         {
-            var order = await _orderDataProvider.CreateOrderAsync(orderDTO.MapOrderDTOToOrder(), 
+            var order = await _orderDataProvider.CreateOrderAsync(orderDTO.MapOrderDTOToOrder(),
                 new Cart
                 {
                     Items = orderDTO.OrderItems
@@ -32,10 +34,10 @@ namespace WebStore.ServiceHosting.Controllers
                 },
                     UserName);
             return order.MapOrderToOrderDTO();
-}
-
+        }
+        [HttpGet("{id}"),ActionName("Get")]
         public OrderDTO GetOrderById(int id) => _orderDataProvider.GetOrderById(id).MapOrderToOrderDTO();
-
+        [HttpGet("user/{UserName}")]
         public IEnumerable<OrderDTO> GetUserOrders(string UserName) => _orderDataProvider.GetUserOrders(UserName)
             .Select(o=>new OrderDTO());
     }
