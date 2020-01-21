@@ -4,18 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.ViewModels;
-using WebStore.Interfaces.DataProviders;
 using WebStore.Infrastructure.Mappings;
 using Microsoft.AspNetCore.Authorization;
 using WebStore.Domain.Entity.Identity;
+using WebStore.Interfaces.Api;
 
 namespace WebStore.Controllers
 {
     [Authorize]
     public class EmployeeController : Controller
     {
-        IEmployeeDataProvider _EmployeeData;
-        public EmployeeController(IEmployeeDataProvider employeeDataProvider)
+        IEmployeeService _EmployeeData;
+        public EmployeeController(IEmployeeService employeeDataProvider)
         {
             _EmployeeData = employeeDataProvider;
         }

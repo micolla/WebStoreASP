@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entity;
-using WebStore.Interfaces.DataProviders;
+using WebStore.Interfaces.Api;
 using WebStore.Domain.ViewModels;
 
 namespace WebStore.Controllers
 {
     public class CatalogController : Controller
     {
-        private readonly IProductDataProvider _ProductData;
-        public CatalogController(IProductDataProvider productData)
+        private readonly IProductService _ProductData;
+        public CatalogController(IProductService productData)
         {
             _ProductData = productData;
         }

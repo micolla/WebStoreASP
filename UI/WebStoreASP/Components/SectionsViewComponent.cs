@@ -1,18 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using WebStore.Interfaces.DataProviders;
+using WebStore.Interfaces.Api;
 using WebStore.Domain.ViewModels;
-using WebStore.Infrastructure.Mappings;
 
 namespace WebStore.Components
 {
     public class SectionsViewComponent : ViewComponent
     {
-        private readonly IProductDataProvider _ProductData;
-        public SectionsViewComponent(IProductDataProvider productData)
+        private readonly IProductService _ProductData;
+        public SectionsViewComponent(IProductService productData)
         {
             _ProductData = productData;
         }

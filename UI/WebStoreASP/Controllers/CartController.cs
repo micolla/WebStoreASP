@@ -1,25 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entity.Identity;
-using WebStore.Interfaces.DataProviders;
 using WebStore.Domain.ViewModels;
+using WebStore.Interfaces.DataProviders;
+using WebStore.Interfaces.Api;
 
 namespace WebStore.Controllers
 {
     public class CartController : Controller
     {
         private readonly ICartDataProvider _cartDataProvider;
-        private readonly IProductDataProvider _productDataProvider;
+        private readonly IProductService _productData;
         private readonly UserManager<User> userManager;
 
-        public CartController(ICartDataProvider cartDataProvider, IProductDataProvider productDataProvider, UserManager<User> userManager)
+        public CartController(ICartDataProvider cartDataProvider, IProductService productDataProvider, UserManager<User> userManager)
         {
             _cartDataProvider = cartDataProvider;
-            _productDataProvider = productDataProvider;
+            _productData = productDataProvider;
             this.userManager = userManager;
         }
         public IActionResult Details() => View(new DetailsCartViewModel { CartViewModel = GetCartViewModel(), OrderViewModel = new OrderViewModel() });
@@ -28,7 +28,7 @@ namespace WebStore.Controllers
         {
             var cartItems = _cartDataProvider.GetCartItems();
             if (cartItems == null) return new CartViewModel();
-            var products = _productDataProvider.GetProducts(new Domain.Entity.ProductFilter
+            var products = _productData.GetProducts(new Domain.Entity.ProductFilter
             { Ids = cartItems.Select(i => i.ProductId) }).ToList();
             return new CartViewModel
             {
@@ -61,7 +61,7 @@ namespace WebStore.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> CheckOutAsync(OrderViewModel Model, [FromServices] IOrderDataProvider OrderService)
+        public async Task<IActionResult> CheckOutAsync(OrderViewModel Model, [FromServices] IOrderService OrderService)
         {
             if (!ModelState.IsValid)
                 return View(nameof(Details), new DetailsCartViewModel
@@ -71,14 +71,19 @@ namespace WebStore.Controllers
                 });
             var user = await userManager.FindByNameAsync(User.Identity.Name);
             var order = await OrderService.CreateOrderAsync(
-                new Domain.Entity.Order
+                new Domain.DTO.Orders.OrderDTO
                 {
                     Address = Model.Address,
                     Phone = Model.Phone,
-                    User = user,
-                    Date = DateTime.Now
+                    Date = DateTime.Now,
+                    OrderItems = _cartDataProvider.Cart.Items.Select(i => 
+                        new Domain.DTO.Orders.OrderItemDTO
+                        {
+                            ProductId = i.ProductId,
+                            Quantity = i.Quantity
+                        })
                 },
-                _cartDataProvider.Cart, User.Identity.Name);
+                User.Identity.Name);
 
             _cartDataProvider.ClearCart();
 

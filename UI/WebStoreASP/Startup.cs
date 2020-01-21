@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebStore.Interfaces.DataProviders;
 using WebStore.Interfaces.Api;
+using WebStore.Interfaces.DataProviders;
 using WebStore.Services.DataProviders.MSSQLDataProvider;
 using WebStore.DAL.SQLDBData;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Identity;
 using WebStore.Services.Database;
 using WebStore.Services.DataProviders.CookiesDataProvider;
 using WebStore.Clients.Values;
+using WebStore.Clients.Employees;
+using WebStore.Clients.Products;
+using WebStore.Clients.Orders;
 
 namespace WebStore
 {
@@ -27,10 +30,11 @@ namespace WebStore
             
             services.AddDbContext<WebStoreDBContext>(opt=>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
+            services.AddScoped<IEmployeeService, EmployeesClient>();
+            services.AddScoped<IProductService, ProductsClient>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
             services.AddScoped<ICartDataProvider, CookieCartProvider>();
-            services.AddScoped<IOrderDataProvider, OrderDataProvider>();
+            services.AddScoped<IOrderService, OrdersClient>();
             services.AddTransient<WebStoreDataInitialize>();
 
             services.AddTransient<IValuesService, ValuesClient>();
