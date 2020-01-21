@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +7,6 @@ using WebStore.Domain.Entity.Identity;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.DataProviders;
 using WebStore.Interfaces.Api;
-using WebStore.Domain.DTO.Identity;
 
 namespace WebStore.Controllers
 {
