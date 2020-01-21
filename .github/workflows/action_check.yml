@@ -1,0 +1,23 @@
+name: .NET Core
+
+on: 
+  pull_request: {branches: [develop, master]}
+  push: {branches: [develop, master]}
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+        
+    - name: Build with dotnet
+      run: dotnet build -c Debug
+    
+    - name: UnitTests
+      run: dotnet test
