@@ -14,13 +14,11 @@ namespace WebStore.Controllers
     {
         private readonly ICartDataProvider _cartDataProvider;
         private readonly IProductService _productData;
-        private readonly UserManager<User> userManager;
 
         public CartController(ICartDataProvider cartDataProvider, IProductService productDataProvider, UserManager<User> userManager)
         {
             _cartDataProvider = cartDataProvider;
             _productData = productDataProvider;
-            this.userManager = userManager;
         }
         public IActionResult Details() => View(new DetailsCartViewModel { CartViewModel = GetCartViewModel(), OrderViewModel = new OrderViewModel() });
 
@@ -69,7 +67,6 @@ namespace WebStore.Controllers
                     CartViewModel = GetCartViewModel(),
                     OrderViewModel = Model
                 });
-            var user = await userManager.FindByNameAsync(User.Identity.Name);
             var order = await OrderService.CreateOrderAsync(
                 new Domain.DTO.Orders.OrderDTO
                 {

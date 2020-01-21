@@ -9,6 +9,7 @@ using WebStore.DAL.SQLDBData;
 using WebStore.Domain.Entity.Identity;
 using WebStore.Interfaces.DataProviders;
 using WebStore.Services.Database;
+using WebStore.Services.DataProviders.CookiesDataProvider;
 using WebStore.Services.DataProviders.MSSQLDataProvider;
 
 namespace WebStore.ServiceHosting
@@ -23,9 +24,12 @@ namespace WebStore.ServiceHosting
         {
             services.AddDbContext<WebStoreDBContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddTransient<WebStoreDataInitialize>();
+
             services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
-            //services.AddScoped<ICartDataProvider, CookieCartProvider>();
+            services.AddScoped<ICartDataProvider, CookieCartProvider>();
             services.AddScoped<IOrderDataProvider, OrderDataProvider>();
             services.AddTransient<WebStoreDataInitialize>();
 
@@ -36,8 +40,10 @@ namespace WebStore.ServiceHosting
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDataInitialize webStoreDataInitialize)
         {
+            webStoreDataInitialize.InitialAsync().Wait();
+            webStoreDataInitialize.IdentityInitialAsync().Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
