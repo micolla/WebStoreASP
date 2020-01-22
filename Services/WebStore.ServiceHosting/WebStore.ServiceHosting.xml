@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebStore.ServiceHosting</name>
+    </assembly>
+    <members>
+        <member name="M:WebStore.ServiceHosting.Controllers.EmployeesApiController.#ctor(WebStore.Interfaces.DataProviders.IEmployeeDataProvider)">
+            <summary>
+            
+            </summary>
+            <param name="employeeDataProvider">Провайдер для работы с данными по сотрудника</param>
+        </member>
+    </members>
+</doc>

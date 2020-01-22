@@ -11,7 +11,10 @@ namespace WebStore.ServiceHosting.Controllers
     public class EmployeesApiController : ControllerBase, IEmployeeService
     {
         private readonly IEmployeeDataProvider _employeeDataProvider;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="employeeDataProvider">Провайдер для работы с данными по сотрудника</param>
         public EmployeesApiController(IEmployeeDataProvider employeeDataProvider) => _employeeDataProvider = employeeDataProvider;
 
         [HttpPost, ActionName("Post")]
