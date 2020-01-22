@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,15 +28,18 @@ namespace WebStore.ServiceHosting
             
             services.AddTransient<WebStoreDataInitialize>();
 
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<WebStoreDBContext>()
+                .AddDefaultTokenProviders();
+
+
             services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
             services.AddScoped<ICartDataProvider, CookieCartProvider>();
             services.AddScoped<IOrderDataProvider, OrderDataProvider>();
-            services.AddTransient<WebStoreDataInitialize>();
 
-            services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<WebStoreDBContext>()
-                .AddDefaultTokenProviders();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
