@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebStore.Domain.Entity;
+using WebStore.Interfaces.Api;
 using WebStore.Interfaces.DataProviders;
 
 namespace WebStore.Services.DataProviders.CookiesDataProvider
 {
     public class CookieCartProvider : ICartDataProvider
     {
-        private readonly IProductDataProvider _productDataProvider;
+        private readonly IProductService _productDataProvider;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string _cartName;
 
@@ -39,7 +40,7 @@ namespace WebStore.Services.DataProviders.CookiesDataProvider
             cookies.Append(_cartName, cookie, new CookieOptions { Expires = DateTime.Now.AddDays(15) });
         }
 
-        public CookieCartProvider(IProductDataProvider productDataProvider,IHttpContextAccessor httpContextAccessor)
+        public CookieCartProvider(IProductService productDataProvider,IHttpContextAccessor httpContextAccessor)
         {
             _productDataProvider = productDataProvider;
             _httpContextAccessor = httpContextAccessor;
