@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,9 @@ using WebStore.DAL.SQLDBData;
 using WebStore.Domain.Entity.Identity;
 using WebStore.Interfaces.DataProviders;
 using WebStore.Services.Database;
+using WebStore.Services.DataProviders.CookiesDataProvider;
 using WebStore.Services.DataProviders.MSSQLDataProvider;
+using Swashbuckle.AspNetCore;
 
 namespace WebStore.ServiceHosting
 {
@@ -23,25 +26,44 @@ namespace WebStore.ServiceHosting
         {
             services.AddDbContext<WebStoreDBContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
-            services.AddScoped<IProductDataProvider, ProductDataProvider>();
-            //services.AddScoped<ICartDataProvider, CookieCartProvider>();
-            services.AddScoped<IOrderDataProvider, OrderDataProvider>();
+            
             services.AddTransient<WebStoreDataInitialize>();
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<WebStoreDBContext>()
                 .AddDefaultTokenProviders();
 
+
+            services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
+            services.AddScoped<IProductDataProvider, ProductDataProvider>();
+            services.AddScoped<ICartDataProvider, CookieCartProvider>();
+            services.AddScoped<IOrderDataProvider, OrderDataProvider>();
+            services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "WebStore.API", Version = "v1" });
+                opt.IncludeXmlComments("WebStore.ServiceHosting.xml");
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDataInitialize webStoreDataInitialize)
         {
+            webStoreDataInitialize.InitialAsync().Wait();
+            webStoreDataInitialize.IdentityInitialAsync().Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(opt =>
+            {
+                opt.SwaggerEndpoint("Swagger/v1/swagger.json", "WebStore.API");
+                opt.RoutePrefix = string.Empty;
+            });
 
             app.UseMvc();
         }
