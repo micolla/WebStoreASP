@@ -328,11 +328,11 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
-/WebStoreASP/wwwroot/lib
-/WebStoreASP/wwwroot/js/site.min.js.map
-/WebStoreASP/wwwroot/js/site.js
-/WebStoreASP/wwwroot/css/site.css
-/WebStoreASP/wwwroot/css/site.min.css
-/WebStoreASP/wwwroot/js/site.min.js
+/UI/WebStoreASP/wwwroot/lib
+/UI/WebStoreASP/wwwroot/js/site.min.js.map
+/UI/WebStoreASP/wwwroot/js/site.js
+/UI/WebStoreASP/wwwroot/css/site.css
+/UI/WebStoreASP/wwwroot/css/site.min.css
+/UI/WebStoreASP/wwwroot/js/site.min.js
 /UI/WebStoreASP/Logs/
 /Services/WebStore.ServiceHosting/Logs/
