@@ -5,9 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore.Interfaces.Api;
 using WebStore.Interfaces.DataProviders;
-using WebStore.Services.DataProviders.MSSQLDataProvider;
-using WebStore.DAL.SQLDBData;
-using Microsoft.EntityFrameworkCore;
 using WebStore.Domain.Entity.Identity;
 using Microsoft.AspNetCore.Identity;
 using WebStore.Services.Database;
@@ -17,6 +14,8 @@ using WebStore.Clients.Employees;
 using WebStore.Clients.Products;
 using WebStore.Clients.Orders;
 using WebStore.Clients.Identity;
+using Microsoft.Extensions.Logging;
+using WebStore.Logger;
 
 namespace WebStore
 {
@@ -79,8 +78,9 @@ namespace WebStore
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory logger)
         {
+            logger.AddLog4Net();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

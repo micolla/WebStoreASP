@@ -12,7 +12,8 @@ using WebStore.Interfaces.DataProviders;
 using WebStore.Services.Database;
 using WebStore.Services.DataProviders.CookiesDataProvider;
 using WebStore.Services.DataProviders.MSSQLDataProvider;
-using Swashbuckle.AspNetCore;
+using Microsoft.Extensions.Logging;
+using WebStore.Logger;
 
 namespace WebStore.ServiceHosting
 {
@@ -49,8 +50,9 @@ namespace WebStore.ServiceHosting
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDataInitialize webStoreDataInitialize)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, WebStoreDataInitialize webStoreDataInitialize, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddLog4Net();
             webStoreDataInitialize.InitialAsync().Wait();
             webStoreDataInitialize.IdentityInitialAsync().Wait();
             if (env.IsDevelopment())
