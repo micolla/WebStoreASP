@@ -4,7 +4,7 @@ using WebStore.Domain.ViewModels;
 using WebStore.Domain.Entity;
 using WebStore.Infrastructure.Mappings;
 
-namespace WebStoreTests
+namespace WebStore.Tests.Infrastructure.Mappings
 {
     [TestClass]
     public class MappingsTest
