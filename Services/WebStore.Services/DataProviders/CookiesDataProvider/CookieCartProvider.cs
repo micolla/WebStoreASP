@@ -8,12 +8,10 @@ namespace WebStore.Services.DataProviders.CookiesDataProvider
 {
     public class CookieCartProvider : ICartDataProvider
     {
-        private readonly IProductService _productDataProvider;
         private readonly ICartStore _cartStore;        
 
-        public CookieCartProvider(IProductService productDataProvider,ICartStore cartStore)
+        public CookieCartProvider(ICartStore cartStore)
         {
-            _productDataProvider = productDataProvider;
             _cartStore = cartStore;
         }
         public void AddToCart(int productId)
