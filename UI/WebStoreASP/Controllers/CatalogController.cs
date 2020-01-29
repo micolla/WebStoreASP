@@ -25,7 +25,8 @@ namespace WebStore.Controllers
                                                                 Name = p.Name,
                                                                 Order = p.Order,
                                                                 Price = p.Price,
-                                                                ImageUrl = p.ImageUrl
+                                                                ImageUrl = p.ImageUrl,
+                                                                Brand = p.Brand.Name                                                                
                                                             }).OrderBy(p => p.Order)
                             });
         }
@@ -35,6 +36,10 @@ namespace WebStore.Controllers
             if (!productId.HasValue)
                 return NotFound();
             var product = _ProductData.GetProductById(productId.Value);
+            if (product is null)
+            {
+                return NotFound();
+            }
             return View(new ProductViewModel
                                 {
                                     Id = product.Id,
