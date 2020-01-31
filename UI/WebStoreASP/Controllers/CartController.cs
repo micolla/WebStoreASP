@@ -70,6 +70,7 @@ namespace WebStore.Controllers
             var order = await OrderService.CreateOrderAsync(
                 new Domain.DTO.Orders.OrderDTO
                 {
+                    Name = Model.Name,
                     Address = Model.Address,
                     Phone = Model.Phone,
                     Date = DateTime.Now,
