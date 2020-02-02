@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Clients", "Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Logger", "Common\WebStore.Logger\WebStore.Logger.csproj", "{C7F57F47-288A-4F99-8D25-6446882416C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.Services.Test", "Tests\WebStore.Services.Test\WebStore.Services.Test.csproj", "{DF6FD014-9A11-42F5-A18B-0CFA41AD3C61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Services.Test", "Tests\WebStore.Services.Test\WebStore.Services.Test.csproj", "{DF6FD014-9A11-42F5-A18B-0CFA41AD3C61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
