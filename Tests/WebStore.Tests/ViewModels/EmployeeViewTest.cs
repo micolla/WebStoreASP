@@ -2,7 +2,7 @@
 using System;
 using WebStore.Domain.ViewModels;
 
-namespace WebStoreTests
+namespace WebStore.Tests.ViewModels
 {
     [TestClass]
     public class EmployeeViewTest

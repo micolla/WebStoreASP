@@ -10,6 +10,5 @@ namespace WebStore.Interfaces.DataProviders
         void DecreaseFromCart(int productId);
         void DeleteFromCart(int productId);
         void ClearCart();
-        Cart Cart { get; }
     }
 }

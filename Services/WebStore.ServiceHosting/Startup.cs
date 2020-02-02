@@ -38,6 +38,7 @@ namespace WebStore.ServiceHosting
             services.AddScoped<IEmployeeDataProvider, EmployeeDataProvider>();
             services.AddScoped<IProductDataProvider, ProductDataProvider>();
             services.AddScoped<ICartDataProvider, CookieCartProvider>();
+            services.AddScoped<ICartStore, CartStore>();
             services.AddScoped<IOrderDataProvider, OrderDataProvider>();
             services.AddSwaggerGen(opt =>
             {

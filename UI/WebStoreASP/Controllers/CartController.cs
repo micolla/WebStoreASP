@@ -74,7 +74,7 @@ namespace WebStore.Controllers
                     Address = Model.Address,
                     Phone = Model.Phone,
                     Date = DateTime.Now,
-                    OrderItems = _cartDataProvider.Cart.Items.Select(i => 
+                    OrderItems = _cartDataProvider.GetCartItems().Select(i => 
                         new Domain.DTO.Orders.OrderItemDTO
                         {
                             ProductId = i.ProductId,
