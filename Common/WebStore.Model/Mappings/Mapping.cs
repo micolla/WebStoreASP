@@ -40,7 +40,7 @@ namespace WebStore.Domain.Mappings
             Address = orderDTO.Address,
             Date = orderDTO.Date,
             Phone = orderDTO.Phone,
-            OrderItems = orderDTO.OrderItems.Select(i=>i.MapOrderItemDTOToOrderItem()).ToList()
+            //OrderItems = orderDTO.OrderItems.Select(i=>i.MapOrderItemDTOToOrderItem()).ToList()
         };
         public static OrderItem MapOrderItemDTOToOrderItem(this OrderItemDTO orderItemDTO) => new OrderItem
         {
