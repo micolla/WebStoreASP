@@ -121,6 +121,7 @@ namespace WebStore.Controllers
         }
 
         #endregion
+        public IActionResult GetCartView() => ViewComponent("Cart");
 
     }
 }
